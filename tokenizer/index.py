@@ -8,7 +8,7 @@ def japanesetoken():
     text = request.get_json(force=True)
     print(text)
     word = tagger(text["text"])
-    res_dct={i:[str(word[i]), str(word[i].feature.pos1), str(word[i].feature.lemma), str(word[i].feature.cType), str(word[i].feature.cForm), str(word[i].feature.pron), str(word[i].feature.pronBase), str(word[i].pos)] for i in range(0,len(word),)}
+    res_dct=[{"id":i, "token":str(word[i]), "wordType":str(word[i].feature.pos1), "tokenRoot":str(word[i].feature.lemma), "conjugationType":str(word[i].feature.cType), "conjugationForm":str(word[i].feature.cForm), "pronunciation":str(word[i].feature.pron), "pronunciationBase":str(word[i].feature.pronBase), "extraInfo":str(word[i].pos)} for i in range(0,len(word),)]
 
     tokenizedtext=json.dumps(res_dct, ensure_ascii=False)
     return tokenizedtext
